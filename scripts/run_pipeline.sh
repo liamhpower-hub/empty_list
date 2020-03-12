@@ -30,7 +30,7 @@ python formatcsq.py -tsv ${out_prefix}.split.pickgene.gencode.tsv -vcf ${out_pre
 python filter.py -tsv ${out_prefix}.split.pickgene.gencode.formatcsq.tsv -genelist $genelist
 source deactivate
 
-mkdir ${outdir}/tmp
+mkdir -p ${outdir}/tmp
 mv ${out_prefix}.split.pickgene.gencode.tsv ${outdir}/tmp
 mv ${out_prefix}.split.pickgene.gencode.vcf ${outdir}/tmp 
 mv ${out_prefix}.split.pickgene.gencode.vcf_summary.html ${outdir}/tmp
