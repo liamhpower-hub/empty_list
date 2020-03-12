@@ -13,7 +13,11 @@ module load java/1.8.0_60
 ## The result is an index file and another vcf where all multi-allelic sites are split
 
 input_vcf=$1
-output_vcf=${input_vcf%vcf.gz}split.vcf
+output_dir=$2
+
+output_base=$( basename $input_vcf )
+output_vcf=${output_base%vcf.gz}split.vcf
+
 ref=/cluster/tufts/bio/data/genomes/HomoSapiens/Ensembl/GRCh38/Sequence/WholeGenomeFasta/genome.fa
 
 ## generate vcf index with tabix
@@ -22,7 +26,7 @@ ref=/cluster/tufts/bio/data/genomes/HomoSapiens/Ensembl/GRCh38/Sequence/WholeGen
 /cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk LeftAlignAndTrimVariants \
  -R $ref \
  -V $input_vcf \
- -O $output_vcf \
+ -O ${output_dir}/${output_vcf} \
  --max-indel-length 535 \
  --split-multi-allelics
 

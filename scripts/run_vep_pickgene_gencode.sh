@@ -5,13 +5,12 @@ source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
 
 if [ $# -eq 0 ]
   then
-    echo "Error: no argument supplied. Usage: sh run_vep_pickgene_genecode.sh input.vcf datestring"
+    echo "Error: no argument supplied. Usage: sh run_vep_pickgene_genecode.sh input.vcf"
     exit 1
 fi
 
 input_vcf=$1
-date=$2
-annotated_vcf=${input_vcf%vcf}${date}.pickgene.gencode.vcf
+annotated_vcf=${input_vcf%vcf}pickgene.gencode.vcf
 intermediate_tsv=${annotated_vcf%vcf}tsv
 
 cache_dir=/cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/cache/
@@ -55,10 +54,5 @@ echo "----Starting conversion to TSV-----"
 --show-filtered \
 -F CHROM -F POS -F ID -F REF -F ALT -F TYPE -F QUAL -F FILTER -F AC -F AF -F AN -F DP -F CSQ -GF AD -GF DP -GF GQ -GF GT \
 -O $intermediate_tsv 
-
-### move files
-#final_dir=/cluster/tufts/chinlab/rbator01/wes_vcf/vcf/annotated_vcf/
-#mv $annotated_vcf $final_dir
-#mv $intermediate_tsv $final_dir
 
 echo "Done."
