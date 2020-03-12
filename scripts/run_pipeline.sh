@@ -20,12 +20,17 @@ out_prefix=${outdir}/${base_out%.vcf.gz}
 
 mkdir -p ${outdir}
 
+echo "----- Starting processing file $vcf ----"
+
 ./select_variants_vcf.sh $vcf $outdir
 ./run_vep_pickgene_gencode.sh ${out_prefix}.split.vcf
 rm ${out_prefix}.split.vcf*
 
 module load anaconda/3
 source activate /cluster/tufts/bio/tools/conda_envs/variant_filtering
+
+echo "---- Starting parsing and filtering with Python  -----"
+
 python formatcsq.py -tsv ${out_prefix}.split.pickgene.gencode.tsv -vcf ${out_prefix}.split.pickgene.gencode.vcf
 python filter.py -tsv ${out_prefix}.split.pickgene.gencode.formatcsq.tsv -genelist $genelist
 source deactivate
