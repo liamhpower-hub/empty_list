@@ -50,21 +50,21 @@ echo "----- Starting processing file $vcf ----"
 echo "---- Split vcf to chrM and nomt -----"
 ./select_variants_mt.sh ${out_prefix}.split.vcf $outdir $ref
 
-echo "---Starting VEP annotation and conversion to TSV----"
+echo "--- Starting VEP annotation ----"
 source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
-./run_vep_pickgene_gencode.sh ${out_prefix}.split.nomt.vcf
-#source deactivate
+./run_vep_pickgene_gencode.sh ${out_prefix}.split.nomt.vcf $ref
 
-rm ${out_prefix}.split.vcf*
+hmtnote annotate ${out_prefix}.split.mt.vcf ${out_prefix}.split.mt.hmtnote.csv --csv
+
+echo "--- Starting conversion to TSV ----"
+./variants_to_table.sh ${out_prefix}.split.nomt.pickgene.gencode.vcf $ref
+
+#rm ${out_prefix}.split.vcf*
 
 echo "---- Starting parsing and filtering with Python  -----"
 
-#source activate /cluster/tufts/bio/tools/conda_envs/variant_filtering
 python formatcsq.py -tsv ${out_prefix}.split.nomt.pickgene.gencode.tsv -vcf ${out_prefix}.split.nomt.pickgene.gencode.vcf
 python filter.py -tsv ${out_prefix}.split.nomt.pickgene.gencode.formatcsq.tsv -genelist $genelist
-#source deactivate
-
-
 
 # move intermediate files to tmp location
 #mkdir -p ${outdir}/tmp

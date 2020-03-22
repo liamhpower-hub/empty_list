@@ -5,16 +5,15 @@
 
 if [ $# -eq 0 ]
   then
-    echo "Error: no argument supplied. Usage: sh run_vep_pickgene_genecode.sh input.vcf"
+    echo "Error: no argument supplied. Usage: sh run_vep_pickgene_genecode.sh input.vcf ref.fa "
     exit 1
 fi
 
 input_vcf=$1
+REF=$2
 annotated_vcf=${input_vcf%vcf}pickgene.gencode.vcf
-intermediate_tsv=${annotated_vcf%vcf}tsv
 
 cache_dir=/cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/cache/
-REF=/cluster/tufts/bio/data/genomes/HomoSapiens/Ensembl/GRCh38/Sequence/WholeGenomeFasta/genome.fa
 species=homo_sapiens
 cadd_files=/cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/cache/CADD/grch38/whole_genome_SNVs.tsv.gz,/cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/cache/CADD/grch38/InDels.tsv.gz
 clinvar=/cluster/tufts/bio/data/clinvar/15oct19/clinvar.vcf.gz
@@ -41,16 +40,5 @@ vep -i $input_vcf \
 --species $species \
 --custom $clinvar,ClinVar,vcf,exact,0,CLNHGVS,GENEINFO,CLNSIG,CLNREVSTAT,CLNDN, \
 -o $annotated_vcf
-
-source deactivate
-
-## Convert to TSV using GATK
-module load java/1.8.0_60
-/cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk VariantsToTable \
--R $REF \
--V $annotated_vcf \
---show-filtered \
--F CHROM -F POS -F ID -F REF -F ALT -F TYPE -F QUAL -F FILTER -F AC -F AF -F AN -F DP -F CSQ -GF AD -GF DP -GF GQ -GF GT \
--O $intermediate_tsv 
 
 echo "Done."
