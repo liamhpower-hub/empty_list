@@ -7,8 +7,6 @@
 import csv
 import sys 
 import vcf
-import itertools
-import pandas as pd
 import argparse
 
 # In[3]:

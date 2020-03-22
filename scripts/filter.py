@@ -28,15 +28,13 @@ def filter_stringent(df):
     
     no_assert = ['no_assertion_criteria_provided']
     paths = ['Pathogenic','Likely_pathogenic','Pathogenic/Likely_pathogenic','Pathogenic&_other']
-    benigns = ['Benign','Likely_benign','Benign/Likely_benign','protective']
     impacts = ['MODERATE', 'HIGH']
         
     assertion_cond = (~df['ClinVar_CLNREVSTAT'].isin(no_assert))    
     path_cond = (df['ClinVar_CLNSIG'].isin(paths))    
     af_cond = ((df['MAX_AF'].isnull()) | (df['MAX_AF'] < 0.01))    
     impact_cond = (df['IMPACT'].isin(impacts))    
-    benign_cond = ((~df['ClinVar_CLNSIG'].isin(benigns)) | (df['ClinVar_CLNSIG'].isnull()))
-    
+
     df_filter = df.loc[ path_cond & assertion_cond & af_cond & impact_cond]
     
     return df_filter
