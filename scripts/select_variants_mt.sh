@@ -8,8 +8,8 @@ output_dir=$2
 ref=$3
 
 output_base=$( basename $input_vcf )
-output_vcf=${output_base%vcf.gz}split.vcf
-
+output_1=${output_base%vcf}nomt.vcf
+output_2=${output_base%vcf}mt.vcf
 
 ## generate vcf index with tabix
 
@@ -17,10 +17,15 @@ echo "----Starting split VCF -----"
 
 /cluster/tufts/bio/tools/bcbio/1.1.5/bin/tabix -p vcf $input_vcf
 
-/cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk LeftAlignAndTrimVariants \
+/cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk SelectVariants \
  -R $ref \
  -V $input_vcf \
- -O ${output_dir}/${output_vcf} \
- --max-indel-length 535 \
- --split-multi-allelics
+ -O ${output_dir}/${output_1} \
+ -L chrM
+
+/cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk SelectVariants \
+ -R $ref \
+ -V $input_vcf \
+ -O ${output_dir}/${output_1} \
+ -L chr1-chrY
 

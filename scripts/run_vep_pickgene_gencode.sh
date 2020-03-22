@@ -1,7 +1,7 @@
 #!/bin/bash
 
-module load anaconda/3
-source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
+#module load anaconda/3
+#source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
 
 if [ $# -eq 0 ]
   then
@@ -20,7 +20,6 @@ cadd_files=/cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/cache/CADD/g
 clinvar=/cluster/tufts/bio/data/clinvar/15oct19/clinvar.vcf.gz
 
 ## Annotate vcf, output vcf, filter common variants
-echo "---Starting VEP annotation----"
 vep -i $input_vcf \
 --force_overwrite \
 --fork 4 \
@@ -47,7 +46,6 @@ source deactivate
 
 ## Convert to TSV using GATK
 module load java/1.8.0_60
-echo "----Starting conversion to TSV-----"
 /cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk VariantsToTable \
 -R $REF \
 -V $annotated_vcf \
