@@ -1,27 +1,15 @@
 #!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import pandas as pd
 import argparse
 import numpy as np
 import csv
 
-# In[2]:
-
-
 def read_genelist(file_name):
     
     gene_list = [line.rstrip('\n') for line in open(file_name)]
     
-    
     return gene_list
-
-
-# In[3]:
-
 
 def filter_genelist(df, file_name):
     
@@ -30,25 +18,17 @@ def filter_genelist(df, file_name):
     
     return df_filter
 
-
-# In[4]:
-
-
 def filter_canonical(df):
     
     df_filter = df.loc[df['Canonical'] == 'YES']
     
     return df_filter
 
-
-# In[5]:
-
-
 def filter_stringent(df):
     
     no_assert = ['no_assertion_criteria_provided']
     paths = ['Pathogenic','Likely_pathogenic','Pathogenic/Likely_pathogenic','Pathogenic&_other']
-    benigns = ['Benign','Likely_benign','Benign/Likely_benign']
+    benigns = ['Benign','Likely_benign','Benign/Likely_benign','protective']
     impacts = ['MODERATE', 'HIGH']
         
     assertion_cond = (~df['ClinVar_CLNREVSTAT'].isin(no_assert))    
@@ -61,15 +41,11 @@ def filter_stringent(df):
     
     return df_filter
 
-
-# In[6]:
-
-
 def filter_relaxed(df):
     
     no_assert = ['no_assertion_criteria_provided']
     paths = ['Pathogenic','Likely_pathogenic','Pathogenic/Likely_pathogenic','Pathogenic&_other']
-    benigns = ['Benign','Likely_benign','Benign/Likely_benign']
+    benigns = ['Benign','Likely_benign','Benign/Likely_benign','protective']
     impacts = ['MODERATE', 'HIGH']
     
     assertion_cond = (~df['ClinVar_CLNREVSTAT'].isin(no_assert))
@@ -85,10 +61,6 @@ def filter_relaxed(df):
     df_filter = df.loc[ path_cond & assertion_cond | ( af_cond & impact_cond & benign_cond )]
     
     return df_filter
-
-
-# In[7]:
-
 
 def remove_cols(df):
     
@@ -114,10 +86,6 @@ def remove_cols(df):
                        "cDNA_position":"VEP_cDNA_position"})
     return df
 
-
-# In[8]:
-
-
 def npat(df):
     pats = 0
     for col in df:
@@ -125,10 +93,6 @@ def npat(df):
             pats += 1
                 
     return pats
-
-
-# In[9]:
-
 
 def npat_variant(df):
     
@@ -141,9 +105,6 @@ def npat_variant(df):
                 pats_with_path += 1
                 
     return pats_with_path
-
-
-# In[10]:
 
 def format_biobank(tsv_in):
     f = tsv_in
@@ -208,8 +169,6 @@ def format_biobank(tsv_in):
     
     out_file.close()
 
-
-
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-genelist", dest="genelist", help="input genelist", required=True)    
@@ -217,9 +176,6 @@ def parse_args():
     args = parser.parse_args()
 
     return args.genelist,args.tsv_in
-
-
-
 
 def run_filter(tsv_in, genelist):
      
@@ -243,9 +199,6 @@ def run_filter(tsv_in, genelist):
 
     format_biobank(out1)
     format_biobank(out2)
-
-
-
 
 # main
 genelist, tsv_in = parse_args()
