@@ -21,11 +21,11 @@ echo "----Starting split VCF -----"
  -R $ref \
  -V $input_vcf \
  -O ${output_dir}/${output_1} \
- -L chrM
+ -XL chrM
 
 /cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk SelectVariants \
  -R $ref \
  -V $input_vcf \
- -O ${output_dir}/${output_1} \
- -L chr1-chrY
+ -O ${output_dir}/${output_2} \
+ -L chrM
 
