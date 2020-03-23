@@ -11,7 +11,7 @@ fi
 
 input_vcf=$1
 REF=$2
-annotated_vcf=${input_vcf%vcf}pickgene.gencode.vcf
+annotated_vcf=${input_vcf%vcf}pickgene-gencode.vcf
 
 cache_dir=/cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/cache/
 species=homo_sapiens

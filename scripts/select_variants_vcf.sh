@@ -13,8 +13,6 @@ output_vcf=${output_base%vcf.gz}split.vcf
 
 ## generate vcf index with tabix
 
-echo "----Starting split VCF -----"
-
 /cluster/tufts/bio/tools/bcbio/1.1.5/bin/tabix -p vcf $input_vcf
 
 /cluster/tufts/bio/tools/GATK/gatk-4.1.2.0/gatk LeftAlignAndTrimVariants \

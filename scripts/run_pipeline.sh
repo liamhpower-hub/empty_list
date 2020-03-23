@@ -43,33 +43,32 @@ out_prefix=${outdir}/${base_out%.vcf.gz}
 
 mkdir -p ${outdir}
 
-echo "----- Starting processing file $vcf ----"
+echo "----- Starting split multi-allelic variants $vcf ----"
 
 ./select_variants_vcf.sh $vcf $outdir $ref
 
-echo "---- Split vcf to chrM and nomt -----"
-./select_variants_mt.sh ${out_prefix}.split.vcf $outdir $ref
+echo "--- Starting Hmtnote annotation ----"
+source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
+
+hmtnote annotate ${out_prefix}.split.vcf ${out_prefix}.split.hmtnote.vcf --variab --offline
 
 echo "--- Starting VEP annotation ----"
-source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
-./run_vep_pickgene_gencode.sh ${out_prefix}.split.nomt.vcf $ref
-
-hmtnote annotate ${out_prefix}.split.mt.vcf ${out_prefix}.split.mt.hmtnote.csv --csv
+./run_vep_pickgene_gencode.sh ${out_prefix}.split.hmtnote.vcf $ref
 
 echo "--- Starting conversion to TSV ----"
-./variants_to_table.sh ${out_prefix}.split.nomt.pickgene.gencode.vcf $ref
+./variants_to_table.sh ${out_prefix}.split.hmtnote.pickgene-gencode.vcf $ref
 
 #rm ${out_prefix}.split.vcf*
 
 echo "---- Starting parsing and filtering with Python  -----"
 
-python formatcsq.py -tsv ${out_prefix}.split.nomt.pickgene.gencode.tsv -vcf ${out_prefix}.split.nomt.pickgene.gencode.vcf
-python filter.py -tsv ${out_prefix}.split.nomt.pickgene.gencode.formatcsq.tsv -genelist $genelist
+python formatcsq.py -tsv ${out_prefix}.split.pickgene-gencode.hmtnote.tsv -vcf ${out_prefix}.split.pickgene-gencode.hmtnote.vcf
+python filter.py -tsv ${out_prefix}.split.pickgene-gencode.formatcsq.hmtnote.tsv -genelist $genelist
 
 # move intermediate files to tmp location
-#mkdir -p ${outdir}/tmp
-#mv ${out_prefix}.split.pickgene.gencode.tsv ${outdir}/tmp
-#mv ${out_prefix}.split.pickgene.gencode.vcf ${outdir}/tmp 
-#mv ${out_prefix}.split.pickgene.gencode.vcf_summary.html ${outdir}/tmp
-#mv ${out_prefix}.split.pickgene.gencode.formatcsq.tsv ${outdir}/tmp
+mkdir -p ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene.gencode.tsv ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene.gencode.vcf ${outdir}/tmp 
+mv ${out_prefix}.split.hmtnote.pickgene.gencode.vcf_summary.html ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene.gencode.formatcsq.tsv ${outdir}/tmp
 

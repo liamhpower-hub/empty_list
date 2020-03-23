@@ -1,0 +1,273 @@
+##fileformat=VCFv4.2
+##ALT=<ID=NON_REF,Description="Represents any possible alternative allele at this location">
+##FILTER=<ID=ExcessHet,Description="ExcessHet > 54.69">
+##FILTER=<ID=LowQual,Description="Low quality">
+##FILTER=<ID=PASS,Description="All filters passed">
+##FILTER=<ID=VQSRTrancheINDEL95.00to96.00,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: 2.0325 <= x < 3.5848">
+##FILTER=<ID=VQSRTrancheINDEL96.00to97.00,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: 0.4027 <= x < 2.0325">
+##FILTER=<ID=VQSRTrancheINDEL97.00to99.00,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: -1.4369 <= x < 0.4027">
+##FILTER=<ID=VQSRTrancheINDEL99.00to99.50,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: -1.8355 <= x < -1.4369">
+##FILTER=<ID=VQSRTrancheINDEL99.50to99.90,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: -4.2176 <= x < -1.8355">
+##FILTER=<ID=VQSRTrancheINDEL99.90to99.95,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: -6.9917 <= x < -4.2176">
+##FILTER=<ID=VQSRTrancheINDEL99.95to100.00+,Description="Truth sensitivity tranche level for INDEL model at VQS Lod < -170.076">
+##FILTER=<ID=VQSRTrancheINDEL99.95to100.00,Description="Truth sensitivity tranche level for INDEL model at VQS Lod: -170.076 <= x < -6.9917">
+##FILTER=<ID=VQSRTrancheSNP99.70to99.80,Description="Truth sensitivity tranche level for SNP model at VQS Lod: -5.6977 <= x < -3.2739">
+##FILTER=<ID=VQSRTrancheSNP99.80to99.90,Description="Truth sensitivity tranche level for SNP model at VQS Lod: -11.0784 <= x < -5.6977">
+##FILTER=<ID=VQSRTrancheSNP99.90to99.95,Description="Truth sensitivity tranche level for SNP model at VQS Lod: -16.5532 <= x < -11.0784">
+##FILTER=<ID=VQSRTrancheSNP99.95to100.00+,Description="Truth sensitivity tranche level for SNP model at VQS Lod < -36476.1695">
+##FILTER=<ID=VQSRTrancheSNP99.95to100.00,Description="Truth sensitivity tranche level for SNP model at VQS Lod: -36476.1695 <= x < -16.5532">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=MIN_DP,Number=1,Type=Integer,Description="Minimum DP observed within the GVCF block">
+##FORMAT=<ID=PGT,Number=1,Type=String,Description="Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another">
+##FORMAT=<ID=PID,Number=1,Type=String,Description="Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
+##FORMAT=<ID=RGQ,Number=1,Type=Integer,Description="Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)">
+##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
+##GATKCommandLine=<ID=ApplyVQSR,CommandLine="ApplyVQSR  --recal-file /cromwell_root/broad-gotc-prod-execution10/ExomeJointGenotyping/bf6785d4-4e9b-4f48-b0d3-c5da84bab3a2/call-IndelsVariantRecalibrator/SK_3SBD_91samples_vcf.indels.recal --tranches-file /cromwell_root/broad-gotc-prod-execution10/ExomeJointGenotyping/bf6785d4-4e9b-4f48-b0d3-c5da84bab3a2/call-IndelsVariantRecalibrator/SK_3SBD_91samples_vcf.indels.tranches --output tmp.indel.recalibrated.vcf --truth-sensitivity-filter-level 95.0 --mode INDEL --variant /cromwell_root/broad-gotc-prod-execution10/ExomeJointGenotyping/bf6785d4-4e9b-4f48-b0d3-c5da84bab3a2/call-HardFilterAndMakeSitesOnlyVcf/shard-0/SK_3SBD_91samples_vcf.0.variant_filtered.vcf.gz --create-output-variant-index true  --use-allele-specific-annotations false --ignore-all-filters false --exclude-filtered false --interval-set-rule UNION --interval-padding 0 --interval-exclusion-padding 0 --interval-merging-rule ALL --read-validation-stringency SILENT --seconds-between-progress-updates 10.0 --disable-sequence-dictionary-validation false --create-output-bam-index true --create-output-bam-md5 false --create-output-variant-md5 false --lenient false --add-output-sam-program-record true --add-output-vcf-command-line true --cloud-prefetch-buffer 40 --cloud-index-prefetch-buffer -1 --disable-bam-index-caching false --sites-only-vcf-output false --help false --version false --showHidden false --verbosity INFO --QUIET false --use-jdk-deflater false --use-jdk-inflater false --gcs-max-retries 20 --gcs-project-for-requester-pays  --disable-tool-default-read-filters false",Version="4.1.1.0",Date="October 18, 2019 10:56:05 PM UTC">
+##GATKCommandLine=<ID=LeftAlignAndTrimVariants,CommandLine="LeftAlignAndTrimVariants  --output out/test_raw.split.vcf --split-multi-allelics true --max-indel-length 535 --variant ../test/test_raw.vcf.gz --reference /cluster/tufts/bio/data/genomes/HomoSapiens/Ensembl/GRCh38/Sequence/WholeGenomeFasta/genome.fa  --dont-trim-alleles false --keep-original-ac false --max-leading-bases 1000 --suppress-reference-path false --interval-set-rule UNION --interval-padding 0 --interval-exclusion-padding 0 --interval-merging-rule ALL --read-validation-stringency SILENT --seconds-between-progress-updates 10.0 --disable-sequence-dictionary-validation false --create-output-bam-index true --create-output-bam-md5 false --create-output-variant-index true --create-output-variant-md5 false --lenient false --add-output-sam-program-record true --add-output-vcf-command-line true --cloud-prefetch-buffer 40 --cloud-index-prefetch-buffer -1 --disable-bam-index-caching false --sites-only-vcf-output false --help false --version false --showHidden false --verbosity INFO --QUIET false --use-jdk-deflater false --use-jdk-inflater false --gcs-max-retries 20 --gcs-project-for-requester-pays  --disable-tool-default-read-filters false",Version="4.1.2.0",Date="March 23, 2020 6:11:54 PM EDT">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=AS_BaseQRankSum,Number=A,Type=Float,Description="allele specific Z-score from Wilcoxon rank sum test of each Alt Vs. Ref base qualities">
+##INFO=<ID=AS_FS,Number=A,Type=Float,Description="allele specific phred-scaled p-value using Fisher's exact test to detect strand bias of each alt allele">
+##INFO=<ID=AS_InbreedingCoeff,Number=A,Type=Float,Description="allele specific heterozygosity as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation; relate to inbreeding coefficient">
+##INFO=<ID=AS_MQ,Number=A,Type=Float,Description="Allele-specific RMS Mapping Quality">
+##INFO=<ID=AS_MQRankSum,Number=A,Type=Float,Description="Allele-specific Mapping Quality Rank Sum">
+##INFO=<ID=AS_QD,Number=A,Type=Float,Description="Allele-specific Variant Confidence/Quality by Depth">
+##INFO=<ID=AS_RAW_BaseQRankSum,Number=1,Type=String,Description="raw data for allele specific rank sum test of base qualities">
+##INFO=<ID=AS_RAW_MQ,Number=1,Type=String,Description="Allele-specfic raw data for RMS Mapping Quality">
+##INFO=<ID=AS_RAW_MQRankSum,Number=1,Type=String,Description="Allele-specfic raw data for Mapping Quality Rank Sum">
+##INFO=<ID=AS_RAW_ReadPosRankSum,Number=1,Type=String,Description="allele specific raw data for rank sum test of read position bias">
+##INFO=<ID=AS_ReadPosRankSum,Number=A,Type=Float,Description="allele specific Z-score from Wilcoxon rank sum test of each Alt vs. Ref read position bias">
+##INFO=<ID=AS_SB_TABLE,Number=1,Type=String,Description="Allele-specific forward/reverse read counts for strand bias tests">
+##INFO=<ID=AS_SOR,Number=A,Type=Float,Description="Allele specific strand Odds Ratio of 2x|Alts| contingency table to detect allele specific strand bias">
+##INFO=<ID=BaseQRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities">
+##INFO=<ID=DB,Number=0,Type=Flag,Description="dbSNP Membership">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered">
+##INFO=<ID=DS,Number=0,Type=Flag,Description="Were any of the samples downsampled?">
+##INFO=<ID=END,Number=1,Type=Integer,Description="Stop position of the interval">
+##INFO=<ID=ExcessHet,Number=1,Type=Float,Description="Phred-scaled p-value for exact test of excess heterozygosity">
+##INFO=<ID=FS,Number=1,Type=Float,Description="Phred-scaled p-value using Fisher's exact test to detect strand bias">
+##INFO=<ID=InbreedingCoeff,Number=1,Type=Float,Description="Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation">
+##INFO=<ID=MLEAC,Number=A,Type=Integer,Description="Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed">
+##INFO=<ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed">
+##INFO=<ID=MQ,Number=1,Type=Float,Description="RMS Mapping Quality">
+##INFO=<ID=MQRankSum,Number=1,Type=Float,Description="Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities">
+##INFO=<ID=NEGATIVE_TRAIN_SITE,Number=0,Type=Flag,Description="This variant was used to build the negative training set of bad variants">
+##INFO=<ID=POSITIVE_TRAIN_SITE,Number=0,Type=Flag,Description="This variant was used to build the positive training set of good variants">
+##INFO=<ID=QD,Number=1,Type=Float,Description="Variant Confidence/Quality by Depth">
+##INFO=<ID=RAW_MQandDP,Number=2,Type=Integer,Description="Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation.">
+##INFO=<ID=ReadPosRankSum,Number=1,Type=Float,Description="Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias">
+##INFO=<ID=SOR,Number=1,Type=Float,Description="Symmetric Odds Ratio of 2x2 contingency table to detect strand bias">
+##INFO=<ID=VQSLOD,Number=1,Type=Float,Description="Log odds of being a true variant versus being false under the trained gaussian mixture model">
+##INFO=<ID=culprit,Number=1,Type=String,Description="The annotation which was the worst performing in the Gaussian mixture model, likely the reason why the variant was filtered out">
+##contig=<ID=chr1,length=248956422,assembly=genome.fa>
+##contig=<ID=chr2,length=242193529,assembly=genome.fa>
+##contig=<ID=chr3,length=198295559,assembly=genome.fa>
+##contig=<ID=chr4,length=190214555,assembly=genome.fa>
+##contig=<ID=chr5,length=181538259,assembly=genome.fa>
+##contig=<ID=chr6,length=170805979,assembly=genome.fa>
+##contig=<ID=chr7,length=159345973,assembly=genome.fa>
+##contig=<ID=chr8,length=145138636,assembly=genome.fa>
+##contig=<ID=chr9,length=138394717,assembly=genome.fa>
+##contig=<ID=chr10,length=133797422,assembly=genome.fa>
+##contig=<ID=chr11,length=135086622,assembly=genome.fa>
+##contig=<ID=chr12,length=133275309,assembly=genome.fa>
+##contig=<ID=chr13,length=114364328,assembly=genome.fa>
+##contig=<ID=chr14,length=107043718,assembly=genome.fa>
+##contig=<ID=chr15,length=101991189,assembly=genome.fa>
+##contig=<ID=chr16,length=90338345,assembly=genome.fa>
+##contig=<ID=chr17,length=83257441,assembly=genome.fa>
+##contig=<ID=chr18,length=80373285,assembly=genome.fa>
+##contig=<ID=chr19,length=58617616,assembly=genome.fa>
+##contig=<ID=chr20,length=64444167,assembly=genome.fa>
+##contig=<ID=chr21,length=46709983,assembly=genome.fa>
+##contig=<ID=chr22,length=50818468,assembly=genome.fa>
+##contig=<ID=chrX,length=156040895,assembly=genome.fa>
+##contig=<ID=chrY,length=57227415,assembly=genome.fa>
+##contig=<ID=chrM,length=16569,assembly=genome.fa>
+##contig=<ID=chr1_KI270706v1_random,length=175055,assembly=genome.fa>
+##contig=<ID=chr1_KI270707v1_random,length=32032,assembly=genome.fa>
+##contig=<ID=chr1_KI270708v1_random,length=127682,assembly=genome.fa>
+##contig=<ID=chr1_KI270709v1_random,length=66860,assembly=genome.fa>
+##contig=<ID=chr1_KI270710v1_random,length=40176,assembly=genome.fa>
+##contig=<ID=chr1_KI270711v1_random,length=42210,assembly=genome.fa>
+##contig=<ID=chr1_KI270712v1_random,length=176043,assembly=genome.fa>
+##contig=<ID=chr1_KI270713v1_random,length=40745,assembly=genome.fa>
+##contig=<ID=chr1_KI270714v1_random,length=41717,assembly=genome.fa>
+##contig=<ID=chr2_KI270715v1_random,length=161471,assembly=genome.fa>
+##contig=<ID=chr2_KI270716v1_random,length=153799,assembly=genome.fa>
+##contig=<ID=chr3_GL000221v1_random,length=155397,assembly=genome.fa>
+##contig=<ID=chr4_GL000008v2_random,length=209709,assembly=genome.fa>
+##contig=<ID=chr5_GL000208v1_random,length=92689,assembly=genome.fa>
+##contig=<ID=chr9_KI270717v1_random,length=40062,assembly=genome.fa>
+##contig=<ID=chr9_KI270718v1_random,length=38054,assembly=genome.fa>
+##contig=<ID=chr9_KI270719v1_random,length=176845,assembly=genome.fa>
+##contig=<ID=chr9_KI270720v1_random,length=39050,assembly=genome.fa>
+##contig=<ID=chr11_KI270721v1_random,length=100316,assembly=genome.fa>
+##contig=<ID=chr14_GL000009v2_random,length=201709,assembly=genome.fa>
+##contig=<ID=chr14_GL000225v1_random,length=211173,assembly=genome.fa>
+##contig=<ID=chr14_KI270722v1_random,length=194050,assembly=genome.fa>
+##contig=<ID=chr14_GL000194v1_random,length=191469,assembly=genome.fa>
+##contig=<ID=chr14_KI270723v1_random,length=38115,assembly=genome.fa>
+##contig=<ID=chr14_KI270724v1_random,length=39555,assembly=genome.fa>
+##contig=<ID=chr14_KI270725v1_random,length=172810,assembly=genome.fa>
+##contig=<ID=chr14_KI270726v1_random,length=43739,assembly=genome.fa>
+##contig=<ID=chr15_KI270727v1_random,length=448248,assembly=genome.fa>
+##contig=<ID=chr16_KI270728v1_random,length=1872759,assembly=genome.fa>
+##contig=<ID=chr17_GL000205v2_random,length=185591,assembly=genome.fa>
+##contig=<ID=chr17_KI270729v1_random,length=280839,assembly=genome.fa>
+##contig=<ID=chr17_KI270730v1_random,length=112551,assembly=genome.fa>
+##contig=<ID=chr22_KI270731v1_random,length=150754,assembly=genome.fa>
+##contig=<ID=chr22_KI270732v1_random,length=41543,assembly=genome.fa>
+##contig=<ID=chr22_KI270733v1_random,length=179772,assembly=genome.fa>
+##contig=<ID=chr22_KI270734v1_random,length=165050,assembly=genome.fa>
+##contig=<ID=chr22_KI270735v1_random,length=42811,assembly=genome.fa>
+##contig=<ID=chr22_KI270736v1_random,length=181920,assembly=genome.fa>
+##contig=<ID=chr22_KI270737v1_random,length=103838,assembly=genome.fa>
+##contig=<ID=chr22_KI270738v1_random,length=99375,assembly=genome.fa>
+##contig=<ID=chr22_KI270739v1_random,length=73985,assembly=genome.fa>
+##contig=<ID=chrY_KI270740v1_random,length=37240,assembly=genome.fa>
+##contig=<ID=chrUn_KI270302v1,length=2274,assembly=genome.fa>
+##contig=<ID=chrUn_KI270304v1,length=2165,assembly=genome.fa>
+##contig=<ID=chrUn_KI270303v1,length=1942,assembly=genome.fa>
+##contig=<ID=chrUn_KI270305v1,length=1472,assembly=genome.fa>
+##contig=<ID=chrUn_KI270322v1,length=21476,assembly=genome.fa>
+##contig=<ID=chrUn_KI270320v1,length=4416,assembly=genome.fa>
+##contig=<ID=chrUn_KI270310v1,length=1201,assembly=genome.fa>
+##contig=<ID=chrUn_KI270316v1,length=1444,assembly=genome.fa>
+##contig=<ID=chrUn_KI270315v1,length=2276,assembly=genome.fa>
+##contig=<ID=chrUn_KI270312v1,length=998,assembly=genome.fa>
+##contig=<ID=chrUn_KI270311v1,length=12399,assembly=genome.fa>
+##contig=<ID=chrUn_KI270317v1,length=37690,assembly=genome.fa>
+##contig=<ID=chrUn_KI270412v1,length=1179,assembly=genome.fa>
+##contig=<ID=chrUn_KI270411v1,length=2646,assembly=genome.fa>
+##contig=<ID=chrUn_KI270414v1,length=2489,assembly=genome.fa>
+##contig=<ID=chrUn_KI270419v1,length=1029,assembly=genome.fa>
+##contig=<ID=chrUn_KI270418v1,length=2145,assembly=genome.fa>
+##contig=<ID=chrUn_KI270420v1,length=2321,assembly=genome.fa>
+##contig=<ID=chrUn_KI270424v1,length=2140,assembly=genome.fa>
+##contig=<ID=chrUn_KI270417v1,length=2043,assembly=genome.fa>
+##contig=<ID=chrUn_KI270422v1,length=1445,assembly=genome.fa>
+##contig=<ID=chrUn_KI270423v1,length=981,assembly=genome.fa>
+##contig=<ID=chrUn_KI270425v1,length=1884,assembly=genome.fa>
+##contig=<ID=chrUn_KI270429v1,length=1361,assembly=genome.fa>
+##contig=<ID=chrUn_KI270442v1,length=392061,assembly=genome.fa>
+##contig=<ID=chrUn_KI270466v1,length=1233,assembly=genome.fa>
+##contig=<ID=chrUn_KI270465v1,length=1774,assembly=genome.fa>
+##contig=<ID=chrUn_KI270467v1,length=3920,assembly=genome.fa>
+##contig=<ID=chrUn_KI270435v1,length=92983,assembly=genome.fa>
+##contig=<ID=chrUn_KI270438v1,length=112505,assembly=genome.fa>
+##contig=<ID=chrUn_KI270468v1,length=4055,assembly=genome.fa>
+##contig=<ID=chrUn_KI270510v1,length=2415,assembly=genome.fa>
+##contig=<ID=chrUn_KI270509v1,length=2318,assembly=genome.fa>
+##contig=<ID=chrUn_KI270518v1,length=2186,assembly=genome.fa>
+##contig=<ID=chrUn_KI270508v1,length=1951,assembly=genome.fa>
+##contig=<ID=chrUn_KI270516v1,length=1300,assembly=genome.fa>
+##contig=<ID=chrUn_KI270512v1,length=22689,assembly=genome.fa>
+##contig=<ID=chrUn_KI270519v1,length=138126,assembly=genome.fa>
+##contig=<ID=chrUn_KI270522v1,length=5674,assembly=genome.fa>
+##contig=<ID=chrUn_KI270511v1,length=8127,assembly=genome.fa>
+##contig=<ID=chrUn_KI270515v1,length=6361,assembly=genome.fa>
+##contig=<ID=chrUn_KI270507v1,length=5353,assembly=genome.fa>
+##contig=<ID=chrUn_KI270517v1,length=3253,assembly=genome.fa>
+##contig=<ID=chrUn_KI270529v1,length=1899,assembly=genome.fa>
+##contig=<ID=chrUn_KI270528v1,length=2983,assembly=genome.fa>
+##contig=<ID=chrUn_KI270530v1,length=2168,assembly=genome.fa>
+##contig=<ID=chrUn_KI270539v1,length=993,assembly=genome.fa>
+##contig=<ID=chrUn_KI270538v1,length=91309,assembly=genome.fa>
+##contig=<ID=chrUn_KI270544v1,length=1202,assembly=genome.fa>
+##contig=<ID=chrUn_KI270548v1,length=1599,assembly=genome.fa>
+##contig=<ID=chrUn_KI270583v1,length=1400,assembly=genome.fa>
+##contig=<ID=chrUn_KI270587v1,length=2969,assembly=genome.fa>
+##contig=<ID=chrUn_KI270580v1,length=1553,assembly=genome.fa>
+##contig=<ID=chrUn_KI270581v1,length=7046,assembly=genome.fa>
+##contig=<ID=chrUn_KI270579v1,length=31033,assembly=genome.fa>
+##contig=<ID=chrUn_KI270589v1,length=44474,assembly=genome.fa>
+##contig=<ID=chrUn_KI270590v1,length=4685,assembly=genome.fa>
+##contig=<ID=chrUn_KI270584v1,length=4513,assembly=genome.fa>
+##contig=<ID=chrUn_KI270582v1,length=6504,assembly=genome.fa>
+##contig=<ID=chrUn_KI270588v1,length=6158,assembly=genome.fa>
+##contig=<ID=chrUn_KI270593v1,length=3041,assembly=genome.fa>
+##contig=<ID=chrUn_KI270591v1,length=5796,assembly=genome.fa>
+##contig=<ID=chrUn_KI270330v1,length=1652,assembly=genome.fa>
+##contig=<ID=chrUn_KI270329v1,length=1040,assembly=genome.fa>
+##contig=<ID=chrUn_KI270334v1,length=1368,assembly=genome.fa>
+##contig=<ID=chrUn_KI270333v1,length=2699,assembly=genome.fa>
+##contig=<ID=chrUn_KI270335v1,length=1048,assembly=genome.fa>
+##contig=<ID=chrUn_KI270338v1,length=1428,assembly=genome.fa>
+##contig=<ID=chrUn_KI270340v1,length=1428,assembly=genome.fa>
+##contig=<ID=chrUn_KI270336v1,length=1026,assembly=genome.fa>
+##contig=<ID=chrUn_KI270337v1,length=1121,assembly=genome.fa>
+##contig=<ID=chrUn_KI270363v1,length=1803,assembly=genome.fa>
+##contig=<ID=chrUn_KI270364v1,length=2855,assembly=genome.fa>
+##contig=<ID=chrUn_KI270362v1,length=3530,assembly=genome.fa>
+##contig=<ID=chrUn_KI270366v1,length=8320,assembly=genome.fa>
+##contig=<ID=chrUn_KI270378v1,length=1048,assembly=genome.fa>
+##contig=<ID=chrUn_KI270379v1,length=1045,assembly=genome.fa>
+##contig=<ID=chrUn_KI270389v1,length=1298,assembly=genome.fa>
+##contig=<ID=chrUn_KI270390v1,length=2387,assembly=genome.fa>
+##contig=<ID=chrUn_KI270387v1,length=1537,assembly=genome.fa>
+##contig=<ID=chrUn_KI270395v1,length=1143,assembly=genome.fa>
+##contig=<ID=chrUn_KI270396v1,length=1880,assembly=genome.fa>
+##contig=<ID=chrUn_KI270388v1,length=1216,assembly=genome.fa>
+##contig=<ID=chrUn_KI270394v1,length=970,assembly=genome.fa>
+##contig=<ID=chrUn_KI270386v1,length=1788,assembly=genome.fa>
+##contig=<ID=chrUn_KI270391v1,length=1484,assembly=genome.fa>
+##contig=<ID=chrUn_KI270383v1,length=1750,assembly=genome.fa>
+##contig=<ID=chrUn_KI270393v1,length=1308,assembly=genome.fa>
+##contig=<ID=chrUn_KI270384v1,length=1658,assembly=genome.fa>
+##contig=<ID=chrUn_KI270392v1,length=971,assembly=genome.fa>
+##contig=<ID=chrUn_KI270381v1,length=1930,assembly=genome.fa>
+##contig=<ID=chrUn_KI270385v1,length=990,assembly=genome.fa>
+##contig=<ID=chrUn_KI270382v1,length=4215,assembly=genome.fa>
+##contig=<ID=chrUn_KI270376v1,length=1136,assembly=genome.fa>
+##contig=<ID=chrUn_KI270374v1,length=2656,assembly=genome.fa>
+##contig=<ID=chrUn_KI270372v1,length=1650,assembly=genome.fa>
+##contig=<ID=chrUn_KI270373v1,length=1451,assembly=genome.fa>
+##contig=<ID=chrUn_KI270375v1,length=2378,assembly=genome.fa>
+##contig=<ID=chrUn_KI270371v1,length=2805,assembly=genome.fa>
+##contig=<ID=chrUn_KI270448v1,length=7992,assembly=genome.fa>
+##contig=<ID=chrUn_KI270521v1,length=7642,assembly=genome.fa>
+##contig=<ID=chrUn_GL000195v1,length=182896,assembly=genome.fa>
+##contig=<ID=chrUn_GL000219v1,length=179198,assembly=genome.fa>
+##contig=<ID=chrUn_GL000220v1,length=161802,assembly=genome.fa>
+##contig=<ID=chrUn_GL000224v1,length=179693,assembly=genome.fa>
+##contig=<ID=chrUn_KI270741v1,length=157432,assembly=genome.fa>
+##contig=<ID=chrUn_GL000226v1,length=15008,assembly=genome.fa>
+##contig=<ID=chrUn_GL000213v1,length=164239,assembly=genome.fa>
+##contig=<ID=chrUn_KI270743v1,length=210658,assembly=genome.fa>
+##contig=<ID=chrUn_KI270744v1,length=168472,assembly=genome.fa>
+##contig=<ID=chrUn_KI270745v1,length=41891,assembly=genome.fa>
+##contig=<ID=chrUn_KI270746v1,length=66486,assembly=genome.fa>
+##contig=<ID=chrUn_KI270747v1,length=198735,assembly=genome.fa>
+##contig=<ID=chrUn_KI270748v1,length=93321,assembly=genome.fa>
+##contig=<ID=chrUn_KI270749v1,length=158759,assembly=genome.fa>
+##contig=<ID=chrUn_KI270750v1,length=148850,assembly=genome.fa>
+##contig=<ID=chrUn_KI270751v1,length=150742,assembly=genome.fa>
+##contig=<ID=chrUn_KI270752v1,length=27745,assembly=genome.fa>
+##contig=<ID=chrUn_KI270753v1,length=62944,assembly=genome.fa>
+##contig=<ID=chrUn_KI270754v1,length=40191,assembly=genome.fa>
+##contig=<ID=chrUn_KI270755v1,length=36723,assembly=genome.fa>
+##contig=<ID=chrUn_KI270756v1,length=79590,assembly=genome.fa>
+##contig=<ID=chrUn_KI270757v1,length=71251,assembly=genome.fa>
+##contig=<ID=chrUn_GL000214v1,length=137718,assembly=genome.fa>
+##contig=<ID=chrUn_KI270742v1,length=186739,assembly=genome.fa>
+##contig=<ID=chrUn_GL000216v2,length=176608,assembly=genome.fa>
+##contig=<ID=chrUn_GL000218v1,length=161147,assembly=genome.fa>
+##contig=<ID=chrEBV,length=171823,assembly=genome.fa>
+##reference=file:///cluster/tufts/bio/data/genomes/HomoSapiens/Ensembl/GRCh38/Sequence/WholeGenomeFasta/genome.fa
+##source=ApplyVQSR
+##source=LeftAlignAndTrimVariants
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	1255-a	2323-a	2769-a	2834-a	2839-a	2840-a	2841-a	2843-a	2849-a	2854-a	2855-a	2860-a	2865-a	2869-a	2872-a	2875-a	2883-a	2886-a	2887-a	2892-a	2898-a	2899-a	2910-a	2914-a	2915-a	2916-a	2919-a	2920-a	2921-a	2922-a	2923-a	2924-a	2925-a	2926-a	2929-a	2930-1b	2930-a	3030-a	3031-a	3032-a	3033-a	5000-a	5001-a	5002-a	5003-a	5004-a	5005-a	5006-a	5007-a	5008-a	5009-a	5010-a	5011-a	5012-a	5013-a	5014-a	5015-a	5016-a	5017-a	5018-a	5019-a	5020-a	5021-a	5022-a	5023-a	5024-a	5025-a	5026-a	5027-a	5028-a	5029-a	5030-a	5031-a	5032-a	5033-a	5034-a	5035-a	5036-a	5037-a	5038-a	5039-a	5040-a	5041-a	5042-a	5043-a	5044-a	5045-a	5046-a	5047-a	5048-a	5049-a
+chr1	14248	.	T	G	1135.42	VQSRTrancheSNP99.95to100.00	AC=20;AF=0.345;AN=58;AS_BaseQRankSum=0.000;AS_FS=3.736;AS_InbreedingCoeff=-0.3628;AS_MQ=25.14;AS_MQRankSum=-0.500;AS_QD=21.83;AS_ReadPosRankSum=-0.050;AS_SOR=2.191;BaseQRankSum=0.00;DP=112;ExcessHet=11.7413;FS=3.736;InbreedingCoeff=-0.3628;MLEAC=67;MLEAF=1.00;MQ=27.08;MQRankSum=0.00;QD=21.83;ReadPosRankSum=0.00;SOR=2.380;VQSLOD=-1.795e+01;culprit=MQ	GT:AD:DP:GQ:PL	0/0:4,0:4:12:0,12,119	./.:0,0:0:.:0,0,0	0/1:2,3:5:44:74,0,44	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/0:3,0:3:0:0,0,59	./.:0,0:0:.:0,0,0	0/1:2,2:4:52:52,0,52	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/1:1,2:3:21:50,0,21	0/0:3,0:3:0:0,0,35	./.:0,0:0:.:0,0,0	0/1:1,2:3:20:50,0,20	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/1:2,2:4:42:48,0,42	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/1:2,2:4:46:47,0,46	0/1:1,3:4:18:77,0,18	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	1/1:0,2:2:6:60,6,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/0:4,0:4:12:0,12,139	./.:0,0:0:.:0,0,0	0/1:3,1:4:18:18,0,81	0/1:1,1:2:19:19,0,29	0/0:4,0:4:0:0,0,70	./.:0,0:0:.:0,0,0	0/1:1,2:3:21:45,0,21	0/0:2,0:2:6:0,6,70	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/1:1,2:3:21:49,0,21	0/0:6,0:6:0:0,0,139	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	1/1:0,2:2:6:59,6,0	0/1:1,2:3:26:50,0,26	./.:0,0:0:.:0,0,0	0/0:6,0:6:0:0,0,139	./.:0,0:0:.:0,0,0	0/0:4,0:4:0:0,0,70	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/0:8,0:8:0:0,0,209	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	1/1:0,3:3:9:89,9,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/0:4,0:4:0:0,0,70	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/0:6,0:6:0:0,0,139	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/1:4,2:6:41:41,0,106	./.:0,0:0:.:0,0,0	0/1:1,2:3:26:50,0,26	./.:0,0:0:.:0,0,0
+chr1	14354	.	C	A	1073.28	VQSRTrancheSNP99.95to100.00	AC=22;AF=0.153;AN=144;AS_BaseQRankSum=0.000;AS_FS=2.575;AS_InbreedingCoeff=-0.2763;AS_MQ=24.83;AS_MQRankSum=-1.200;AS_QD=7.20;AS_ReadPosRankSum=1.000;AS_SOR=1.218;BaseQRankSum=0.00;DP=477;ExcessHet=15.8438;FS=2.575;InbreedingCoeff=-0.2763;MLEAC=39;MLEAF=0.271;MQ=29.50;MQRankSum=-1.049e+00;QD=7.20;ReadPosRankSum=1.09;SOR=1.218;VQSLOD=-1.736e+01;culprit=MQ	GT:AD:DP:GQ:PL	0/0:2,0:2:0:0,0,35	0/0:9,0:9:0:0,0,243	0/1:5,2:7:38:38,0,142	0/0:4,0:4:12:0,12,139	0/0:6,0:6:0:0,0,139	0/0:6,0:6:0:0,0,139	./.:0,0:0:.:0,0,0	0/0:8,0:8:0:0,0,209	0/1:9,1:10:5:5,0,260	./.:0,0:0:.:0,0,0	0/1:2,2:4:28:46,0,28	./.:1,0:1:.:0,0,0	0/0:5,0:5:1:0,1,125	./.:0,0:0:.:0,0,0	0/0:7,0:7:7:0,7,194	./.:0,0:0:.:0,0,0	0/0:4,0:4:12:0,12,139	./.:0,0:0:.:0,0,0	0/0:10,0:10:0:0,0,229	0/1:4,2:6:40:40,0,103	0/0:3,0:3:9:0,9,104	0/0:7,0:7:21:0,21,233	./.:0,0:0:.:0,0,0	0/0:8,0:8:24:0,24,278	0/0:10,0:10:30:0,30,348	0/1:10,3:13:49:49,0,286	0/1:3,4:7:83:98,0,83	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/0:6,0:6:0:0,0,139	0/0:7,0:7:21:0,21,223	./.:0,0:0:.:0,0,0	0/0:4,0:4:12:0,12,109	0/0:5,0:5:15:0,15,143	./.:0,0:0:.:0,0,0	0/0:9,0:9:0:0,0,243	0/0:4,0:4:12:0,12,119	0/1:6,3:9:60:60,0,176	1/1:0,3:3:9:67,9,0	0/0:8,0:8:0:0,0,209	0/0:4,0:4:0:0,0,49	0/0:2,0:2:0:0,0,45	0/0:8,0:8:0:0,0,209	0/1:7,3:10:39:39,0,208	0/0:9,0:9:0:0,0,243	0/0:6,0:6:15:0,15,209	0/0:4,0:4:0:0,0,90	0/0:5,0:5:0:0,0,104	0/1:8,3:11:59:59,0,224	0/0:4,0:4:12:0,12,139	./.:0,0:0:.:0,0,0	0/0:4,0:4:12:0,12,119	./.:0,0:0:.:0,0,0	./.:0,0:0:.:0,0,0	0/1:1,2:3:26:49,0,26	0/0:5,0:5:0:0,0,104	./.:0,0:0:.:0,0,0	0/0:6,0:6:4:0,4,149	0/1:1,4:5:20:101,0,20	0/1:2,2:4:46:46,0,58	./.:0,0:0:.:0,0,0	0/0:10,0:10:0:0,0,238	0/0:4,0:4:0:0,0,70	0/0:6,0:6:0:0,0,139	0/0:8,0:8:21:0,21,278	./.:0,0:0:.:0,0,0	0/1:11,2:13:20:20,0,275	0/0:6,0:6:0:0,0,139	0/0:9,0:9:0:0,0,223	0/1:4,3:7:68:68,0,102	0/1:7,2:9:31:31,0,205	0/0:4,0:4:0:0,0,70	./.:0,0:0:.:0,0,0	0/1:3,3:6:69:69,0,78	0/0:7,0:7:0:0,0,104	0/0:9,0:9:21:0,21,292	0/0:4,0:4:12:0,12,139	0/0:8,0:8:24:0,24,248	0/0:5,0:5:15:0,15,153	0/1:3,2:5:44:44,0,78	./.:1,0:1:.:0,0,0	0/1:7,2:9:30:30,0,209	0/0:4,0:4:12:0,12,119	0/0:7,0:7:21:0,21,243	0/0:5,0:5:0:0,0,104	0/0:8,0:8:0:0,0,209	0/1:6,2:8:34:34,0,163	0/1:7,3:10:57:57,0,201	0/0:7,0:7:21:0,21,243	0/0:5,0:5:1:0,1,125	0/0:11,0:11:0:0,0,303
+chr1	201359632	.	T	A	796.21	PASS	AC=1;AF=5.495e-03;AN=182;AS_BaseQRankSum=-0.600;AS_FS=5.864;AS_InbreedingCoeff=-0.0055;AS_MQ=60.00;AS_MQRankSum=0.000;AS_QD=16.59;AS_ReadPosRankSum=0.900;AS_SOR=0.657;BaseQRankSum=-5.260e-01;DP=3361;ExcessHet=3.0103;FS=5.864;InbreedingCoeff=-0.0055;MLEAC=1;MLEAF=5.495e-03;MQ=60.00;MQRankSum=0.00;QD=16.59;ReadPosRankSum=0.925;SOR=0.657;VQSLOD=20.62;culprit=MQRankSum	GT:AD:DP:GQ:PL	0/0:36,0:36:96:0,96,1260	0/0:38,0:38:96:0,96,1305	0/0:39,0:39:99:0,103,1296	0/0:38,0:38:94:0,94,1301	0/0:32,0:32:90:0,90,1350	0/0:36,0:36:93:0,93,1395	0/0:35,0:35:90:0,90,1116	0/0:34,0:34:90:0,90,1252	0/0:44,0:44:99:0,106,1446	0/0:41,0:41:99:0,103,1360	0/0:36,0:36:90:0,90,1157	0/0:36,0:36:93:0,93,1286	0/0:33,0:33:90:0,90,1168	0/0:39,0:39:99:0,100,1443	0/0:33,0:33:93:0,93,1171	0/0:32,0:32:90:0,90,1335	0/0:39,0:39:93:0,93,1216	0/0:37,0:37:96:0,96,1176	0/0:36,0:36:94:0,94,1187	0/0:38,0:38:95:0,95,1231	0/0:37,0:37:90:0,90,1252	0/0:37,0:37:94:0,94,1196	0/0:34,0:34:93:0,93,1365	0/0:31,0:31:90:0,90,1127	0/0:33,0:33:95:0,95,1142	0/0:30,0:30:90:0,90,1002	0/0:34,0:34:93:0,93,1395	0/0:46,0:46:99:0,104,1614	0/0:32,0:32:90:0,90,1168	0/0:34,0:34:96:0,96,1147	0/0:36,0:36:90:0,90,1115	0/0:34,0:34:90:0,90,1140	0/0:36,0:36:95:0,95,1225	0/0:31,0:31:81:0,81,1215	0/0:43,0:43:99:0,100,1306	0/0:48,0:48:99:0,120,1800	0/0:34,0:34:97:0,97,1101	0/0:47,0:47:99:0,120,1800	0/0:41,0:41:90:0,90,1304	0/0:33,0:33:90:0,90,1148	0/0:33,0:33:91:0,91,1086	0/0:34,0:34:93:0,93,1132	0/0:35,0:35:93:0,93,1395	0/0:41,0:41:97:0,97,1193	0/0:34,0:34:90:0,90,1046	0/0:34,0:34:93:0,93,1395	0/0:35,0:35:96:0,96,1146	0/0:40,0:40:94:0,94,1345	0/0:34,0:34:90:0,90,1350	0/0:35,0:35:93:0,93,1203	0/0:38,0:38:99:0,100,1250	0/0:34,0:34:90:0,90,1225	0/0:34,0:34:94:0,94,1196	0/0:48,0:48:99:0,120,1800	0/0:33,0:33:93:0,93,1086	0/0:41,0:41:96:0,96,1412	0/0:35,0:35:90:0,90,1302	0/0:34,0:34:93:0,93,1176	0/0:34,0:34:90:0,90,1350	0/0:32,0:32:90:0,90,1350	0/0:44,0:44:99:0,114,1710	0/0:33,0:33:90:0,90,1116	0/0:34,0:34:96:0,96,1440	0/0:36,0:36:99:0,99,1201	0/0:50,0:50:99:0,110,1704	0/0:37,0:37:90:0,90,1276	0/0:39,0:39:92:0,92,1231	0/0:46,0:46:99:0,120,1800	0/0:36,0:36:90:0,90,1285	0/0:36,0:36:97:0,97,1217	0/0:35,0:35:90:0,90,1107	0/0:40,0:40:90:0,90,1306	0/0:37,0:37:99:0,100,1206	0/0:33,0:33:90:0,90,1148	0/0:35,0:35:95:0,95,1311	0/0:42,0:42:95:0,95,1391	0/0:34,0:34:90:0,90,1234	0/0:37,0:37:97:0,97,1217	0/0:46,0:46:98:0,98,1524	0/0:37,0:37:94:0,94,1135	0/0:33,0:33:90:0,90,1320	0/1:21,27:48:99:816,0,562	0/0:35,0:35:90:0,90,1086	0/0:32,0:32:90:0,90,1117	0/0:48,0:48:99:0,107,1618	0/0:34,0:34:91:0,91,1168	0/0:33,0:33:90:0,90,1257	0/0:37,0:37:90:0,90,1293	0/0:36,0:36:99:0,108,1181	0/0:37,0:37:96:0,96,1440	0/0:39,0:39:99:0,101,1322
+chr11	111908925	.	G	A	1555.47	PASS	AC=2;AF=0.011;AN=182;AS_BaseQRankSum=0.300;AS_FS=2.594;AS_InbreedingCoeff=-0.0111;AS_MQ=60.00;AS_MQRankSum=0.000;AS_QD=14.67;AS_ReadPosRankSum=0.150;AS_SOR=0.977;BaseQRankSum=1.89;DP=2978;ExcessHet=3.0344;FS=2.594;InbreedingCoeff=-0.0111;MLEAC=2;MLEAF=0.011;MQ=60.00;MQRankSum=0.00;QD=14.67;ReadPosRankSum=0.215;SOR=0.977;VQSLOD=22.81;culprit=MQRankSum	GT:AD:DP:GQ:PL	0/0:33,0:33:90:0,90,1206	0/0:31,0:31:90:0,90,1078	0/1:18,28:46:99:815,0,487	0/0:33,0:33:93:0,93,1127	0/0:31,0:31:90:0,90,1057	0/0:31,0:31:90:0,90,1092	0/0:34,0:34:93:0,93,1152	0/0:33,0:33:91:0,91,1128	0/0:32,0:32:90:0,90,1177	0/1:32,28:60:99:774,0,822	0/0:33,0:33:91:0,91,1107	0/0:33,0:33:95:0,95,1087	0/0:30,0:30:90:0,90,1023	0/0:31,0:31:90:0,90,1175	0/0:32,0:32:90:0,90,1072	0/0:34,0:34:91:0,91,1141	0/0:31,0:31:90:0,90,996	0/0:32,0:32:90:0,90,1127	0/0:30,0:30:90:0,90,1023	0/0:30,0:30:90:0,90,1037	0/0:33,0:33:90:0,90,1137	0/0:34,0:34:93:0,93,1177	0/0:33,0:33:90:0,90,1086	0/0:35,0:35:90:0,90,1315	0/0:30,0:30:90:0,90,1023	0/0:31,0:31:90:0,90,1068	0/0:31,0:31:93:0,93,1048	0/0:32,0:32:90:0,90,1162	0/0:30,0:30:90:0,90,1023	0/0:30,0:30:90:0,90,1023	0/0:32,0:32:90:0,90,1051	0/0:31,0:31:90:0,90,1137	0/0:32,0:32:90:0,90,1182	0/0:31,0:31:90:0,90,1032	0/0:31,0:31:90:0,90,997	0/0:32,0:32:90:0,90,1221	0/0:32,0:32:90:0,90,1187	0/0:31,0:31:90:0,90,1106	0/0:33,0:33:90:0,90,1231	0/0:33,0:33:90:0,90,1107	0/0:33,0:33:90:0,90,1311	0/0:30,0:30:90:0,90,1023	0/0:30,0:30:90:0,90,1043	0/0:34,0:34:90:0,90,1350	0/0:32,0:32:90:0,90,1252	0/0:30,0:30:90:0,90,1043	0/0:30,0:30:90:0,90,1043	0/0:32,0:32:90:0,90,1182	0/0:33,0:33:90:0,90,1101	0/0:31,0:31:90:0,90,1267	0/0:35,0:35:96:0,96,1137	0/0:32,0:32:90:0,90,1137	0/0:38,0:38:99:0,108,1381	0/0:34,0:34:90:0,90,1307	0/0:33,0:33:90:0,90,1206	0/0:32,0:32:90:0,90,1350	0/0:31,0:31:90:0,90,1027	0/0:32,0:32:90:0,90,1072	0/0:31,0:31:90:0,90,1182	0/0:35,0:35:91:0,91,1168	0/0:31,0:31:90:0,90,1078	0/0:34,0:34:90:0,90,1311	0/0:34,0:34:93:0,93,1267	0/0:29,0:29:81:0,81,1215	0/0:32,0:32:90:0,90,1350	0/0:31,0:31:90:0,90,1196	0/0:33,0:33:90:0,90,1196	0/0:32,0:32:90:0,90,1092	0/0:37,0:37:95:0,95,1232	0/0:36,0:36:90:0,90,1245	0/0:33,0:33:90:0,90,1172	0/0:31,0:31:90:0,90,1037	0/0:35,0:35:93:0,93,1132	0/0:32,0:32:90:0,90,1350	0/0:30,0:30:90:0,90,1033	0/0:33,0:33:90:0,90,1217	0/0:35,0:35:93:0,93,1221	0/0:32,0:32:90:0,90,1031	0/0:31,0:31:90:0,90,1037	0/0:31,0:31:90:0,90,1147	0/0:31,0:31:90:0,90,1078	0/0:34,0:34:94:0,94,1182	0/0:34,0:34:96:0,96,1232	0/0:32,0:32:90:0,90,1221	0/0:37,0:37:90:0,90,1232	0/0:32,0:32:90:0,90,1092	0/0:34,0:34:90:0,90,1197	0/0:34,0:34:96:0,96,1172	0/0:32,0:32:90:0,90,1072	0/0:30,0:30:90:0,90,1033	0/0:31,0:31:90:0,90,1058
+chrM	3316	.	G	A	245295.45	PASS	AC=2;AF=0.011;AN=182;AS_BaseQRankSum=-0.500;AS_FS=0.000;AS_InbreedingCoeff=1.0000;AS_MQ=60.00;AS_MQRankSum=-0.100;AS_QD=34.36;AS_ReadPosRankSum=-0.700;AS_SOR=0.125;BaseQRankSum=-4.570e-01;DP=545806;ExcessHet=0.0120;FS=0.000;InbreedingCoeff=1.0000;MLEAC=2;MLEAF=0.011;MQ=60.00;MQRankSum=-9.000e-03;NEGATIVE_TRAIN_SITE;QD=34.36;ReadPosRankSum=-6.400e-01;SOR=0.125;VQSLOD=-2.250e+00;culprit=MQ	GT:AD:DP:GQ:PL	0/0:5362,0:5362:99:0,120,1800	0/0:6592,0:6592:99:0,120,1800	0/0:6868,0:6868:99:0,120,1800	0/0:6435,0:6435:99:0,120,1800	0/0:5300,0:5300:99:0,120,1800	0/0:6457,0:6457:99:0,120,1800	0/0:7053,0:7053:99:0,120,1800	0/0:6554,0:6554:99:0,120,1800	0/0:6552,0:6552:99:0,120,1800	0/0:5781,0:5781:99:0,120,1800	0/0:6435,0:6435:99:0,120,1800	0/0:4959,0:4959:99:0,120,1800	0/0:6101,0:6101:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:4764,0:4764:99:0,120,1800	0/0:5227,0:5227:99:0,120,1800	0/0:6664,0:6664:99:0,120,1800	0/0:5007,0:5007:99:0,120,1800	0/0:6143,0:6143:99:0,120,1800	0/0:6215,0:6215:99:0,120,1800	0/0:6408,0:6408:99:0,120,1800	0/0:5942,0:5942:99:0,120,1800	0/0:2986,0:2986:99:0,120,1800	0/0:6734,0:6734:99:0,120,1800	0/0:5738,0:5738:99:0,120,1800	0/0:5771,0:5771:99:0,120,1800	0/0:6968,0:6968:99:0,120,1800	0/0:5235,0:5235:99:0,120,1800	0/0:6434,0:6434:99:0,120,1800	0/0:5964,0:5964:99:0,120,1800	0/0:5870,0:5870:99:0,120,1800	0/0:4435,0:4435:99:0,120,1800	0/0:6129,0:6129:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:5597,0:5597:99:0,120,1800	0/0:4806,0:4806:99:0,120,1800	0/0:4725,0:4725:99:0,120,1800	0/0:5598,0:5598:99:0,120,1800	0/0:5856,0:5856:99:0,120,1800	0/0:6184,0:6184:99:0,120,1800	0/0:6203,0:6203:99:0,120,1800	0/0:5510,0:5510:99:0,120,1800	0/0:7088,0:7088:99:0,120,1800	1/1:2,7136:7138:99:245335,21443,0	0/0:6047,0:6047:99:0,120,1800	0/0:5933,0:5933:99:0,120,1800	0/0:6385,0:6385:99:0,120,1800	0/0:6464,0:6464:99:0,120,1800	0/0:6142,0:6142:99:0,120,1800	0/0:6444,0:6444:99:0,120,1800	0/0:4796,0:4796:99:0,120,1800	0/0:4770,0:4770:99:0,120,1800	0/0:5773,0:5773:99:0,120,1800	0/0:6310,0:6310:99:0,120,1800	0/0:6442,0:6442:99:0,120,1800	0/0:6325,0:6325:99:0,120,1800	0/0:6677,0:6677:99:0,120,1800	0/0:6062,0:6062:99:0,120,1800	0/0:6517,0:6517:99:0,120,1800	0/0:6164,0:6164:99:0,120,1800	0/0:6351,0:6351:99:0,120,1800	0/0:5535,0:5535:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:4943,0:4943:99:0,120,1800	0/0:5630,0:5630:99:0,120,1800	0/0:5422,0:5422:99:0,120,1800	0/0:5872,0:5872:99:0,120,1800	0/0:6851,0:6851:99:0,120,1800	0/0:6515,0:6515:99:0,120,1800	0/0:6574,0:6574:99:0,120,1800	0/0:6447,0:6447:99:0,120,1800	0/0:7109,0:7109:99:0,120,1800	0/0:5779,0:5779:99:0,120,1800	0/0:6542,0:6542:99:0,120,1800	0/0:6563,0:6563:99:0,120,1800	0/0:6214,0:6214:99:0,120,1800	0/0:4848,0:4848:99:0,120,1800	0/0:7129,0:7129:99:0,120,1800	0/0:6470,0:6470:99:0,120,1800	0/0:5551,0:5551:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:6383,0:6383:99:0,120,1800	0/0:5422,0:5422:99:0,120,1800	0/0:6520,0:6520:99:0,120,1800	0/0:6680,0:6680:99:0,120,1800	0/0:6620,0:6620:99:0,120,1800	0/0:4523,0:4523:99:0,120,1800	0/0:5728,0:5728:99:0,120,1800	0/0:6537,0:6537:99:0,120,1800	0/0:5380,0:5380:99:0,120,1800	0/0:6240,0:6240:99:0,120,1800
+chrM	3394	.	T	C	692490.52	PASS	AC=6;AF=0.033;AN=182;AS_BaseQRankSum=-1.200;AS_FS=0.000;AS_InbreedingCoeff=1.0000;AS_MQ=60.00;AS_MQRankSum=-1.100;AS_QD=33.84;AS_ReadPosRankSum=-0.250;AS_SOR=0.074;BaseQRankSum=-2.570e-01;DP=545702;ExcessHet=0.0000;FS=0.000;InbreedingCoeff=1.0000;MLEAC=6;MLEAF=0.033;MQ=60.00;MQRankSum=0.032;QD=33.84;ReadPosRankSum=0.364;SOR=0.074;VQSLOD=16.80;culprit=MQRankSum	GT:AD:DP:GQ:PL	0/0:5362,0:5362:99:0,120,1800	0/0:6592,0:6592:99:0,120,1800	1/1:1,7260:7261:99:245633,21806,0	0/0:6435,0:6435:99:0,120,1800	0/0:5300,0:5300:99:0,120,1800	0/0:6457,0:6457:99:0,120,1800	0/0:7053,0:7053:99:0,120,1800	0/0:6554,0:6554:99:0,120,1800	0/0:6552,0:6552:99:0,120,1800	1/1:0,5941:5941:99:200709,17841,0	0/0:6435,0:6435:99:0,120,1800	0/0:4959,0:4959:99:0,120,1800	0/0:6101,0:6101:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:4764,0:4764:99:0,120,1800	0/0:5227,0:5227:99:0,120,1800	0/0:6664,0:6664:99:0,120,1800	0/0:5007,0:5007:99:0,120,1800	0/0:6143,0:6143:99:0,120,1800	0/0:6215,0:6215:99:0,120,1800	0/0:6408,0:6408:99:0,120,1800	0/0:5942,0:5942:99:0,120,1800	0/0:2986,0:2986:99:0,120,1800	0/0:6734,0:6734:99:0,120,1800	0/0:5738,0:5738:99:0,120,1800	0/0:5771,0:5771:99:0,120,1800	1/1:2,7258:7262:99:246238,21824,0	0/0:5235,0:5235:99:0,120,1800	0/0:6434,0:6434:99:0,120,1800	0/0:5964,0:5964:99:0,120,1800	0/0:5870,0:5870:99:0,120,1800	0/0:4435,0:4435:99:0,120,1800	0/0:6129,0:6129:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:5597,0:5597:99:0,120,1800	0/0:4806,0:4806:99:0,120,1800	0/0:4725,0:4725:99:0,120,1800	0/0:5598,0:5598:99:0,120,1800	0/0:5856,0:5856:99:0,120,1800	0/0:6184,0:6184:99:0,120,1800	0/0:6203,0:6203:99:0,120,1800	0/0:5510,0:5510:99:0,120,1800	0/0:7088,0:7088:99:0,120,1800	0/0:6163,0:6163:99:0,120,1800	0/0:6047,0:6047:99:0,120,1800	0/0:5933,0:5933:99:0,120,1800	0/0:6385,0:6385:99:0,120,1800	0/0:6464,0:6464:99:0,120,1800	0/0:6142,0:6142:99:0,120,1800	0/0:6444,0:6444:99:0,120,1800	0/0:4796,0:4796:99:0,120,1800	0/0:4770,0:4770:99:0,120,1800	0/0:5773,0:5773:99:0,120,1800	0/0:6310,0:6310:99:0,120,1800	0/0:6442,0:6442:99:0,120,1800	0/0:6325,0:6325:99:0,120,1800	0/0:6677,0:6677:99:0,120,1800	0/0:6062,0:6062:99:0,120,1800	0/0:6517,0:6517:99:0,120,1800	0/0:6164,0:6164:99:0,120,1800	0/0:6351,0:6351:99:0,120,1800	0/0:5535,0:5535:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:4943,0:4943:99:0,120,1800	0/0:5630,0:5630:99:0,120,1800	0/0:5422,0:5422:99:0,120,1800	0/0:5872,0:5872:99:0,120,1800	0/0:6851,0:6851:99:0,120,1800	0/0:6515,0:6515:99:0,120,1800	0/0:6574,0:6574:99:0,120,1800	0/0:6447,0:6447:99:0,120,1800	0/0:7109,0:7109:99:0,120,1800	0/0:5779,0:5779:99:0,120,1800	0/0:6542,0:6542:99:0,120,1800	0/0:6563,0:6563:99:0,120,1800	0/0:6214,0:6214:99:0,120,1800	0/0:4848,0:4848:99:0,120,1800	0/0:7129,0:7129:99:0,120,1800	0/0:6470,0:6470:99:0,120,1800	0/0:5551,0:5551:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:6383,0:6383:99:0,120,1800	0/0:5422,0:5422:99:0,120,1800	0/0:6520,0:6520:99:0,120,1800	0/0:6680,0:6680:99:0,120,1800	0/0:6620,0:6620:99:0,120,1800	0/0:4523,0:4523:99:0,120,1800	0/0:5728,0:5728:99:0,120,1800	0/0:6537,0:6537:99:0,120,1800	0/0:5380,0:5380:99:0,120,1800	0/0:6240,0:6240:99:0,120,1800
+chrM	3460	.	G	A	692490.52	PASS	AC=6;AF=0.033;AN=182;AS_BaseQRankSum=-1.200;AS_FS=0.000;AS_InbreedingCoeff=1.0000;AS_MQ=60.00;AS_MQRankSum=-1.100;AS_QD=33.84;AS_ReadPosRankSum=-0.250;AS_SOR=0.074;BaseQRankSum=-2.570e-01;DP=545702;ExcessHet=0.0000;FS=0.000;InbreedingCoeff=1.0000;MLEAC=6;MLEAF=0.033;MQ=60.00;MQRankSum=0.032;QD=33.84;ReadPosRankSum=0.364;SOR=0.074;VQSLOD=16.80;culprit=MQRankSum	GT:AD:DP:GQ:PL	0/0:5362,0:5362:99:0,120,1800	0/0:6592,0:6592:99:0,120,1800	1/1:1,7260:7261:99:245633,21806,0	0/0:6435,0:6435:99:0,120,1800	0/0:5300,0:5300:99:0,120,1800	0/0:6457,0:6457:99:0,120,1800	0/0:7053,0:7053:99:0,120,1800	0/0:6554,0:6554:99:0,120,1800	0/0:6552,0:6552:99:0,120,1800	1/1:0,5941:5941:99:200709,17841,0	0/0:6435,0:6435:99:0,120,1800	0/0:4959,0:4959:99:0,120,1800	0/0:6101,0:6101:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:4764,0:4764:99:0,120,1800	0/0:5227,0:5227:99:0,120,1800	0/0:6664,0:6664:99:0,120,1800	0/0:5007,0:5007:99:0,120,1800	0/0:6143,0:6143:99:0,120,1800	0/0:6215,0:6215:99:0,120,1800	0/0:6408,0:6408:99:0,120,1800	0/0:5942,0:5942:99:0,120,1800	0/0:2986,0:2986:99:0,120,1800	0/0:6734,0:6734:99:0,120,1800	0/0:5738,0:5738:99:0,120,1800	0/0:5771,0:5771:99:0,120,1800	1/1:2,7258:7262:99:246238,21824,0	0/0:5235,0:5235:99:0,120,1800	0/0:6434,0:6434:99:0,120,1800	0/0:5964,0:5964:99:0,120,1800	0/0:5870,0:5870:99:0,120,1800	0/0:4435,0:4435:99:0,120,1800	0/0:6129,0:6129:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:5597,0:5597:99:0,120,1800	0/0:4806,0:4806:99:0,120,1800	0/0:4725,0:4725:99:0,120,1800	0/0:5598,0:5598:99:0,120,1800	0/0:5856,0:5856:99:0,120,1800	0/0:6184,0:6184:99:0,120,1800	0/0:6203,0:6203:99:0,120,1800	0/0:5510,0:5510:99:0,120,1800	0/0:7088,0:7088:99:0,120,1800	0/0:6163,0:6163:99:0,120,1800	0/0:6047,0:6047:99:0,120,1800	0/0:5933,0:5933:99:0,120,1800	0/0:6385,0:6385:99:0,120,1800	0/0:6464,0:6464:99:0,120,1800	0/0:6142,0:6142:99:0,120,1800	0/0:6444,0:6444:99:0,120,1800	0/0:4796,0:4796:99:0,120,1800	0/0:4770,0:4770:99:0,120,1800	0/0:5773,0:5773:99:0,120,1800	0/0:6310,0:6310:99:0,120,1800	0/0:6442,0:6442:99:0,120,1800	0/0:6325,0:6325:99:0,120,1800	0/0:6677,0:6677:99:0,120,1800	0/0:6062,0:6062:99:0,120,1800	0/0:6517,0:6517:99:0,120,1800	0/0:6164,0:6164:99:0,120,1800	0/0:6351,0:6351:99:0,120,1800	0/0:5535,0:5535:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:4943,0:4943:99:0,120,1800	0/0:5630,0:5630:99:0,120,1800	0/0:5422,0:5422:99:0,120,1800	0/0:5872,0:5872:99:0,120,1800	0/0:6851,0:6851:99:0,120,1800	0/0:6515,0:6515:99:0,120,1800	0/0:6574,0:6574:99:0,120,1800	0/0:6447,0:6447:99:0,120,1800	0/0:7109,0:7109:99:0,120,1800	0/0:5779,0:5779:99:0,120,1800	0/0:6542,0:6542:99:0,120,1800	0/0:6563,0:6563:99:0,120,1800	0/0:6214,0:6214:99:0,120,1800	0/0:4848,0:4848:99:0,120,1800	0/0:7129,0:7129:99:0,120,1800	0/0:6470,0:6470:99:0,120,1800	0/0:5551,0:5551:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:6383,0:6383:99:0,120,1800	0/0:5422,0:5422:99:0,120,1800	0/0:6520,0:6520:99:0,120,1800	0/0:6680,0:6680:99:0,120,1800	0/0:6620,0:6620:99:0,120,1800	0/0:4523,0:4523:99:0,120,1800	0/0:5728,0:5728:99:0,120,1800	0/0:6537,0:6537:99:0,120,1800	0/0:5380,0:5380:99:0,120,1800	0/0:6240,0:6240:99:0,120,1800
+chrM	4216	.	T	C	4438006.09	PASS	AC=40;AF=0.220;AN=182;AS_BaseQRankSum=0.000;AS_FS=0.000;AS_InbreedingCoeff=1.0000;AS_MQ=47.06;AS_MQRankSum=0.050;AS_QD=33.93;AS_ReadPosRankSum=-0.100;AS_SOR=0.866;BaseQRankSum=0.550;DP=557022;ExcessHet=-0.0000;FS=0.000;InbreedingCoeff=1.0000;MLEAC=40;MLEAF=0.220;MQ=47.05;MQRankSum=0.751;QD=33.93;ReadPosRankSum=-1.880e-01;SOR=0.866;VQSLOD=-3.267e+00;culprit=MQ	GT:AD:DP:GQ:PL	0/0:5362,0:5362:99:0,120,1800	0/0:6592,0:6592:99:0,120,1800	1/1:0,7363:7364:99:249442,22129,0	1/1:0,7366:7366:99:250656,22165,0	0/0:5826,0:5826:99:0,120,1800	1/1:0,7458:7458:99:253904,22424,0	0/0:6323,0:6323:99:0,120,1800	1/1:0,7345:7345:99:250619,22082,0	0/0:6552,0:6552:99:0,120,1800	1/1:1,6110:6111:99:204824,18363,0	0/0:5567,0:5567:99:0,120,1800	0/0:5302,0:5302:99:0,120,1800	0/0:6101,0:6101:99:0,120,1800	0/0:4561,0:4561:99:0,120,1800	0/0:5163,0:5163:99:0,120,1800	0/0:5588,0:5588:99:0,120,1800	1/1:0,7460:7465:99:255533,22440,0	0/0:5007,0:5007:99:0,120,1800	0/0:6143,0:6143:99:0,120,1800	0/0:6215,0:6215:99:0,120,1800	0/0:6408,0:6408:99:0,120,1800	0/0:5942,0:5942:99:0,120,1800	1/1:0,3669:3671:99:124325,11039,0	0/0:6734,0:6734:99:0,120,1800	0/0:5738,0:5738:99:0,120,1800	1/1:0,6890:6890:99:234817,20716,0	1/1:0,7409:7409:99:251076,22275,0	0/0:4991,0:4991:99:0,120,1800	0/0:6544,0:6544:99:0,120,1800	0/0:5964,0:5964:99:0,120,1800	0/0:5238,0:5238:99:0,120,1800	1/1:0,5228:5228:99:176854,15718,0	0/0:5742,0:5742:99:0,120,1800	0/0:5624,0:5624:99:0,120,1800	0/0:5597,0:5597:99:0,120,1800	1/1:3,5908:5913:99:200073,17720,0	1/1:0,5934:5939:99:201400,17846,0	0/0:6988,0:6988:99:0,120,1800	0/0:5856,0:5856:99:0,120,1800	0/0:6184,0:6184:99:0,120,1800	0/0:6203,0:6203:99:0,120,1800	0/0:5510,0:5510:99:0,120,1800	0/0:6357,0:6357:99:0,120,1800	0/0:6163,0:6163:99:0,120,1800	0/0:5314,0:5314:99:0,120,1800	0/0:5933,0:5933:99:0,120,1800	0/0:6390,0:6390:99:0,120,1800	0/0:6939,0:6939:99:0,120,1800	0/0:5314,0:5314:99:0,120,1800	0/0:6937,0:6937:99:0,120,1800	1/1:1,5740:5743:99:194819,17251,0	1/1:2,5653:5655:99:191581,16989,0	0/0:5773,0:5773:99:0,120,1800	1/1:0,7259:7259:99:246053,21825,0	0/0:5718,0:5718:99:0,120,1800	1/1:0,7217:7217:99:245124,21714,0	0/0:6677,0:6677:99:0,120,1800	1/1:2,7096:7098:99:241357,21334,0	0/0:6556,0:6556:99:0,120,1800	0/0:6164,0:6164:99:0,120,1800	0/0:6351,0:6351:99:0,120,1800	0/0:5431,0:5431:99:0,120,1800	0/0:6564,0:6564:99:0,120,1800	0/0:4943,0:4943:99:0,120,1800	0/0:5630,0:5630:99:0,120,1800	0/0:6068,0:6068:99:0,120,1800	0/0:5872,0:5872:99:0,120,1800	0/0:6271,0:6271:99:0,120,1800	0/0:6515,0:6515:99:0,120,1800	0/0:5957,0:5957:99:0,120,1800	0/0:6447,0:6447:99:0,120,1800	0/0:6548,0:6548:99:0,120,1800	0/0:5076,0:5076:99:0,120,1800	0/0:6542,0:6542:99:0,120,1800	0/0:6563,0:6563:99:0,120,1800	0/0:6214,0:6214:99:0,120,1800	0/0:4696,0:4696:99:0,120,1800	0/0:6536,0:6536:99:0,120,1800	0/0:6628,0:6628:99:0,120,1800	1/1:0,6626:6626:99:223657,19913,0	0/0:6564,0:6564:99:0,120,1800	0/0:5917,0:5917:99:0,120,1800	1/1:0,6236:6239:99:211947,18761,0	0/0:6520,0:6520:99:0,120,1800	0/0:6937,0:6937:99:0,120,1800	0/0:6620,0:6620:99:0,120,1800	0/0:4523,0:4523:99:0,120,1800	1/1:1,6830:6831:99:230177,20523,0	0/0:6757,0:6757:99:0,120,1800	0/0:5380,0:5380:99:0,120,1800	0/0:6240,0:6240:99:0,120,1800

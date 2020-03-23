@@ -18,7 +18,9 @@ output_tsv=${input_vcf%vcf}tsv
 -R $REF \
 -V $input_vcf \
 --show-filtered \
--F CHROM -F POS -F ID -F REF -F ALT -F TYPE -F QUAL -F FILTER -F AC -F AF -F AN -F DP -F CSQ -GF AD -GF DP -GF GQ -GF GT \
--O $output_tsv 
+-F CHROM -F POS -F ID -F REF -F ALT -F TYPE -F QUAL -F FILTER -F AC -F AF -F AN -F DP \
+-F AlleleFreqH -F CSQ \
+-GF AD -GF DP -GF GQ -GF GT \
+ -O $output_tsv 
 
 echo "Done."
