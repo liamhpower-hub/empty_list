@@ -34,7 +34,6 @@ def filter_stringent(df):
     path_cond = (df['ClinVar_CLNSIG'].isin(paths))    
     af_cond = ((df['MAX_AF'].isnull()) | (df['MAX_AF'] < 0.01))    
     impact_cond = (df['IMPACT'].isin(impacts))    
-
     df_filter = df.loc[ path_cond & assertion_cond & af_cond & impact_cond]
     
     return df_filter
@@ -45,7 +44,7 @@ def filter_relaxed(df):
     paths = ['Pathogenic','Likely_pathogenic','Pathogenic/Likely_pathogenic','Pathogenic&_other']
     benigns = ['Benign','Likely_benign','Benign/Likely_benign','protective']
     impacts = ['MODERATE', 'HIGH']
-    
+
     assertion_cond = (~df['ClinVar_CLNREVSTAT'].isin(no_assert))
     
     path_cond = (df['ClinVar_CLNSIG'].isin(paths))
@@ -55,14 +54,27 @@ def filter_relaxed(df):
     impact_cond = (df['IMPACT'].isin(impacts))
     
     benign_cond = ((~df['ClinVar_CLNSIG'].isin(benigns)) | (df['ClinVar_CLNSIG'].isnull()))
+
+
+    df_filter = df.loc[ path_cond & assertion_cond | ( af_cond & impact_cond & benign_cond ) ]
     
-    df_filter = df.loc[ path_cond & assertion_cond | ( af_cond & impact_cond & benign_cond )]
-    
+    return df_filter
+
+def filter_chrm(df):
+
+    # filter out additional chrM variants that have up or downstream consequences
+    # since the genes are so close together there are many
+    # add additional mitomap allele frequency filter
+
+    up_down_cons = ['upstream_gene_variant','downstream_gene_variant']
+    chrm_cond = ( (~df['CHROM'] == 'chrM') | (df['CHROM'] == 'chrM') & (~df['VEP_Consequence'].isin(up_down_cons)) & (df['AlleleFreqH'] < 0.01))
+    df_filter = df.loc[ chrm_cond]
+
     return df_filter
 
 def remove_cols(df):
     
-    #for gencode
+    #for gencode VEP annotation and hmtnote annotation
     cols_to_remove = ["Gene","Feature_type","Feature","BIOTYPE","EXON","INTRON","HGVSc","HGVSp",
                       "CDS_position","Codons","Existing_variation","DISTANCE",
                       "STRAND","FLAGS","SYMBOL_SOURCE","HGNC_ID","CANONICAL",
