@@ -1,25 +1,16 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
-
 
 import csv
 import sys 
 import vcf
 import argparse
 
-# In[3]:
-
-
 def chunks(l, n):
     """Yield successive n-sized chunks from l."""
     for i in range(0, len(l), n):
         yield l[i:i + n]
-
-
-# In[4]:
-
 
 def getCsqHeader(vcf_file):
   reader = vcf.Reader(open(vcf_file, 'r'))
@@ -28,10 +19,6 @@ def getCsqHeader(vcf_file):
   csq_header[0]=csq_header[0].split(" ")[-1]
   
   return(csq_header)
-
-
-# In[5]:
-
 
 def modHeader(header_list):
     header_mod = []
@@ -42,10 +29,6 @@ def modHeader(header_list):
         header_mod.append(output)
         
     return header_mod
-
-
-# In[6]:
-
 
 def modRow(row_list):
     
@@ -70,10 +53,6 @@ def modRow(row_list):
                 
     return rest_mod
 
-
-# In[7]:
-
-
 def replaceCsqHeader(tsv_in, tsv_out, csq_header):
     
     csv.field_size_limit(sys.maxsize)
@@ -85,7 +64,7 @@ def replaceCsqHeader(tsv_in, tsv_out, csq_header):
         header_found=0
     
         for line in reader:
-        
+
             if (header_found == 0):
                 header_found = 1
                 csq_index = line.index("CSQ")
@@ -122,7 +101,7 @@ def reformat(vcf_in,tsv_in):
     
     tsv_out = tsv_in.replace("tsv","formatcsq.tsv")
     csq_header = getCsqHeader(vcf_in)
-    replaceCsqHeader(tsv_in, tsv_out, csq_header)    
+    replaceCsqHeader(tsv_in, tsv_out, csq_header)
     
 
 def parse_args():
