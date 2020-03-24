@@ -204,7 +204,8 @@ def run_filter(tsv_in, genelist):
     df1.to_csv(out1, sep="\t",index=False)
     
     df2 = filter_relaxed(df)
-    df2 = remove_cols(df2) 
+    df2 = filter_chrm(df2)
+    df2 = remove_cols(df2)
     df2.to_csv(out2, sep="\t",index=False)
 
     format_biobank(out1)
