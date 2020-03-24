@@ -26,6 +26,10 @@ printf "Argument vcf is %s\n" "$vcf"
 printf "Argument genelist is %s\n" "$genelist"
 printf "Argument outdir is %s\n" "$outdir"
 
+
+## get script dir
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 ## starting analysis
 module load anaconda/3
 module load java/1.8.0_60
@@ -45,7 +49,7 @@ mkdir -p ${outdir}
 
 echo "----- Starting split multi-allelic variants $vcf ----"
 
-./select_variants_vcf.sh $vcf $outdir $ref
+sh $DIR/select_variants_vcf.sh $vcf $outdir $ref
 
 echo "--- Starting Hmtnote annotation ----"
 source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
@@ -53,22 +57,22 @@ source activate /cluster/tufts/bio/tools/conda_envs/ensembl-vep-versions/98/
 hmtnote annotate ${out_prefix}.split.vcf ${out_prefix}.split.hmtnote.vcf --variab --offline
 
 echo "--- Starting VEP annotation ----"
-./run_vep_pickgene_gencode.sh ${out_prefix}.split.hmtnote.vcf $ref
+sh $DIR/run_vep_pickgene_gencode.sh ${out_prefix}.split.hmtnote.vcf $ref
 
 echo "--- Starting conversion to TSV ----"
-./variants_to_table.sh ${out_prefix}.split.hmtnote.pickgene-gencode.vcf $ref
+sh $DIR/variants_to_table.sh ${out_prefix}.split.hmtnote.pickgene-gencode.vcf $ref
 
 #rm ${out_prefix}.split.vcf*
 
 echo "---- Starting parsing and filtering with Python  -----"
 
-python formatcsq.py -tsv ${out_prefix}.split.pickgene-gencode.hmtnote.tsv -vcf ${out_prefix}.split.pickgene-gencode.hmtnote.vcf
-python filter.py -tsv ${out_prefix}.split.pickgene-gencode.formatcsq.hmtnote.tsv -genelist $genelist
+python $DIR/formatcsq.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.tsv -vcf ${out_prefix}.split.hmtnote.pickgene-gencode.vcf
+python $DIR/filter.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv -genelist $genelist
 
 # move intermediate files to tmp location
 mkdir -p ${outdir}/tmp
-mv ${out_prefix}.split.hmtnote.pickgene.gencode.tsv ${outdir}/tmp
-mv ${out_prefix}.split.hmtnote.pickgene.gencode.vcf ${outdir}/tmp 
-mv ${out_prefix}.split.hmtnote.pickgene.gencode.vcf_summary.html ${outdir}/tmp
-mv ${out_prefix}.split.hmtnote.pickgene.gencode.formatcsq.tsv ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.tsv ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.vcf ${outdir}/tmp 
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.vcf_summary.html ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv ${outdir}/tmp
 
