@@ -14,13 +14,13 @@ def read_genelist(file_name):
 def filter_genelist(df, file_name):
     
     gene_list = read_genelist(file_name)
-    df_filter = df.loc[(df['SYMBOL'].isin(gene_list)) | (df['CHROM'] == 'chrM')]
+    df_filter = df.loc[ df['SYMBOL'].isin(gene_list) ]
     
     return df_filter
 
 def filter_canonical(df):
     
-    df_filter = df.loc[df['Canonical'] == 'YES']
+    df_filter = df.loc[df[ 'Canonical'] == 'YES' ]
     
     return df_filter
 
@@ -29,12 +29,19 @@ def filter_stringent(df):
     no_assert = ['no_assertion_criteria_provided']
     paths = ['Pathogenic','Likely_pathogenic','Pathogenic/Likely_pathogenic','Pathogenic&_other']
     impacts = ['MODERATE', 'HIGH']
-        
+    up_down_cons = ['upstream_gene_variant', 'downstream_gene_variant']
+
     assertion_cond = (~df['ClinVar_CLNREVSTAT'].isin(no_assert))    
     path_cond = (df['ClinVar_CLNSIG'].isin(paths))    
     af_cond = ((df['MAX_AF'].isnull()) | (df['MAX_AF'] < 0.01))    
-    impact_cond = (df['IMPACT'].isin(impacts))    
-    df_filter = df.loc[ path_cond & assertion_cond & af_cond & impact_cond]
+    impact_cond = (df['IMPACT'].isin(impacts))
+    chrm_cond =  (df['CHROM'] == 'chrM')
+    not_chrm_cond = (~(df['CHROM'] == 'chrM'))
+    chrm_af_cond = (df['AlleleFreqH'] < 0.01)
+
+    up_down_cond = (~df['Consequence'].isin(up_down_cons))
+
+    df_filter = df.loc[ (not_chrm_cond & path_cond & assertion_cond & af_cond & impact_cond) | (chrm_cond & path_cond & assertion_cond & chrm_af_cond & impact_cond & up_down_cond) ]
     
     return df_filter
 
@@ -44,32 +51,20 @@ def filter_relaxed(df):
     paths = ['Pathogenic','Likely_pathogenic','Pathogenic/Likely_pathogenic','Pathogenic&_other']
     benigns = ['Benign','Likely_benign','Benign/Likely_benign','protective']
     impacts = ['MODERATE', 'HIGH']
+    up_down_cons = ['upstream_gene_variant', 'downstream_gene_variant']
 
     assertion_cond = (~df['ClinVar_CLNREVSTAT'].isin(no_assert))
-    
     path_cond = (df['ClinVar_CLNSIG'].isin(paths))
-    
     af_cond = ((df['MAX_AF'].isnull()) | (df['MAX_AF'] < 0.01))
-    
     impact_cond = (df['IMPACT'].isin(impacts))
-    
     benign_cond = ((~df['ClinVar_CLNSIG'].isin(benigns)) | (df['ClinVar_CLNSIG'].isnull()))
+    chrm_cond =  (df['CHROM'] == 'chrM')
+    not_chrm_cond = (~(df['CHROM'] == 'chrM'))
+    chrm_af_cond = (df['AlleleFreqH'] < 0.01)
+    up_down_cond = (~df['Consequence'].isin(up_down_cons))
 
-
-    df_filter = df.loc[ path_cond & assertion_cond | ( af_cond & impact_cond & benign_cond ) ]
+    df_filter = df.loc[ ( path_cond & assertion_cond & up_down_cond ) | ( not_chrm_cond & af_cond & impact_cond & benign_cond ) | ( chrm_cond & up_down_cond & chrm_af_cond & impact_cond & benign_cond )]
     
-    return df_filter
-
-def filter_chrm(df):
-
-    # filter out additional chrM variants that have up or downstream consequences
-    # since the genes are so close together there are many
-    # add additional mitomap allele frequency filter
-
-    up_down_cons = ['upstream_gene_variant','downstream_gene_variant']
-    chrm_cond = ( (~df['CHROM'] == 'chrM') | (df['CHROM'] == 'chrM') & (~df['VEP_Consequence'].isin(up_down_cons)) & (df['AlleleFreqH'] < 0.01))
-    df_filter = df.loc[ chrm_cond]
-
     return df_filter
 
 def remove_cols(df):
@@ -87,13 +82,14 @@ def remove_cols(df):
         del df[col]
     
     df = df.rename(columns={"Allele": "VEP_Allele",
-                       "Consequence": "VEP_Consequence",
-                       "IMPACT":"VEP_IMPACT",
-                       "SYMBOL":"VEP_SYMBOL",
-                       "Protein_position":"VEP_Protein_position",
-                       "Amino_acids":"VEP_Amino_acids",
-                       "MAX_AF":"VEP_MAX_AF",
-                       "cDNA_position":"VEP_cDNA_position"})
+                            "AlleleFreqH" : 'Mt_AlleleFreqH',
+                            "Consequence": "VEP_Consequence",
+                            "IMPACT":"VEP_IMPACT",
+                            "SYMBOL":"VEP_SYMBOL",
+                            "Protein_position":"VEP_Protein_position",
+                            "Amino_acids":"VEP_Amino_acids",
+                            "MAX_AF":"VEP_MAX_AF",
+                            "cDNA_position":"VEP_cDNA_position"})
     return df
 
 def npat(df):
@@ -119,7 +115,7 @@ def npat_variant(df):
 def format_biobank(tsv_in):
     f = tsv_in
     
-    df = pd.read_csv(f,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"})
+    df = pd.read_csv(f, sep="\t", dtype={'ClinVar':object, "MAX_AF": "float64", "AlleleFreqH": "float64"})
     df = df.replace(np.nan, '', regex=True)
     
     patients = []
@@ -204,7 +200,6 @@ def run_filter(tsv_in, genelist):
     df1.to_csv(out1, sep="\t",index=False)
     
     df2 = filter_relaxed(df)
-    df2 = filter_chrm(df2)
     df2 = remove_cols(df2)
     df2.to_csv(out2, sep="\t",index=False)
 
