@@ -75,4 +75,6 @@ mv ${out_prefix}.split.hmtnote.pickgene-gencode.tsv ${outdir}/tmp
 mv ${out_prefix}.split.hmtnote.pickgene-gencode.vcf ${outdir}/tmp 
 mv ${out_prefix}.split.hmtnote.pickgene-gencode.vcf_summary.html ${outdir}/tmp
 mv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv ${outdir}/tmp
-
+mv ${out_prefix}.split.vcf ${outdir}/tmp
+mv ${out_prefix}.split.vcf.idx ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.vcf ${outdir}/tmp
