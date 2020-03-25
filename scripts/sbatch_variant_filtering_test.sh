@@ -8,9 +8,7 @@
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 
-HOME=/cluster/tufts/chinlab/rbator01/
-
-#export PATH=$HOME/variant_filtering/scripts/:$PATH
+HOME=/cluster/home/tutln01/
 
 sh $HOME/variant_filtering/scripts/run_pipeline.sh \
 -v $HOME/variant_filtering/test/test_raw.vcf.gz \
