@@ -60,7 +60,7 @@ def filter_relaxed(df):
     benign_cond = ((~df['ClinVar_CLNSIG'].isin(benigns)) | (df['ClinVar_CLNSIG'].isnull()))
     chrm_cond =  (df['CHROM'] == 'chrM')
     not_chrm_cond = (~(df['CHROM'] == 'chrM'))
-    chrm_af_cond = (df['AlleleFreqH'] < 0.01)
+    chrm_af_cond = ((df['AlleleFreqH'] < 0.01) | (df['AlleleFreqH'].isnull()))
     up_down_cond = (~df['Consequence'].isin(up_down_cons))
 
     df_filter = df.loc[ ( path_cond & assertion_cond & up_down_cond ) | ( not_chrm_cond & af_cond & impact_cond & benign_cond ) | ( chrm_cond & up_down_cond & chrm_af_cond & impact_cond & benign_cond )]
@@ -185,7 +185,9 @@ def parse_args():
 
 def run_filter(tsv_in, genelist):
      
-    df = pd.read_csv(tsv_in ,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"})
+    df = pd.read_csv(tsv_in ,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"},low_memory=False)
+    df['AlleleFreqH'] = df['AlleleFreqH'].replace(r'^.', '', regex=True)
+
     df = filter_genelist(df, genelist)
     out_tmp = tsv_in.replace("tsv","genelist.tsv")
     df.to_csv(out_tmp, sep="\t",index=False)
@@ -193,8 +195,8 @@ def run_filter(tsv_in, genelist):
     out1 = out_tmp.replace("tsv","removecols.stringent-filter.tsv")
     out2 = out_tmp.replace("tsv","removecols.relaxed-filter.tsv")
     
-    df = pd.read_csv(out_tmp,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"})
-    
+    df = pd.read_csv(out_tmp,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"},low_memory=False)
+
     df1 = filter_stringent(df)
     df1 = remove_cols(df1) 
     df1.to_csv(out1, sep="\t",index=False)
