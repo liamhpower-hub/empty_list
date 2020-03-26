@@ -8,10 +8,8 @@
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 
-HOME=/cluster/home/tutln01/
-
-sh $HOME/variant_filtering/scripts/run_pipeline.sh \
--v $HOME/variant_filtering/test/test_raw.vcf.gz \
--g $HOME/variant_filtering/test/genelist.txt \
+sh run_pipeline.sh \
+-v ../test/test_raw.vcf.gz \
+-g ../test/genelist.txt \
 -o out
 
